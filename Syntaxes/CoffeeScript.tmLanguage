@@ -408,7 +408,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\[|\]\s*</string>
+			<string>\[|\]</string>
 			<key>name</key>
 			<string>meta.brace.square.coffee</string>
 		</dict>
