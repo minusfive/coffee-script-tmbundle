@@ -5,21 +5,30 @@
 	<key>beforeRunningCommand</key>
 	<string>nop</string>
 	<key>command</key>
-	<string>#!/bin/bash
+	<string>#!/usr/bin/env ruby
 
-${TM_COFFEE:=coffee} -s
+column_number = ENV['TM_COLUMN_NUMBER']
+whitespace    = " " * (column_number.to_i - 1)
+
+print &lt;&lt;-EOS
+###
+#{whitespace}$0
+#{whitespace}###
+EOS
 </string>
+	<key>fallbackInput</key>
+	<string>line</string>
 	<key>input</key>
-	<string>selection</string>
+	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>@R</string>
+	<string>^#</string>
 	<key>name</key>
-	<string>Run selected text</string>
+	<string>Insert Heredoc """ comment</string>
 	<key>output</key>
-	<string>showAsTooltip</string>
+	<string>insertAsSnippet</string>
 	<key>scope</key>
 	<string>source.coffee</string>
 	<key>uuid</key>
-	<string>90424631-D00B-448C-B157-DAC92DFB2858</string>
+	<string>68A86250-0280-11E0-A976-0800200C9A66</string>
 </dict>
 </plist>

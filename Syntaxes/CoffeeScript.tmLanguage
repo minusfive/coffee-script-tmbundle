@@ -9,6 +9,8 @@
 		<string>coffee</string>
 		<string>Cakefile</string>
 	</array>
+	<key>firstLineMatch</key>
+	<string>^#!.*\bcoffee</string>
 	<key>foldingStartMarker</key>
 	<string>.*(-&gt;|=&gt;)\s*$|.*[\[{]\s*$</string>
 	<key>foldingStopMarker</key>
@@ -55,7 +57,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(new)\s+(\w+(?:\.\w*)?)</string>
+			<string>(new)\s+(\w+(?:\.\w*)*)</string>
 			<key>name</key>
 			<string>meta.class.instance.constructor</string>
 		</dict>
@@ -155,7 +157,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>###(?!#)</string>
+			<string>(?&lt;!#)###(?!#)</string>
 			<key>captures</key>
 			<dict>
 				<key>0</key>
@@ -165,9 +167,18 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>###[ \t]*\n</string>
+			<string>###(?:[ \t]*\n)</string>
 			<key>name</key>
 			<string>comment.block.coffee</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>@\w*</string>
+					<key>name</key>
+					<string>storage.type.annotation.coffeescript</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -204,13 +215,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>/(?![\s/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])</string>
+			<string>/(?![\s=/*+{}?]).*?[^\\]/[igmy]{0,4}(?![a-zA-Z0-9])</string>
 			<key>name</key>
 			<string>string.regexp.coffee</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?&lt;!\.)(break|by|catch|continue|else|finally|for|in|of|if|return|switch|then|throw|try|unless|when|while|until|loop|(?&lt;=for)\s+own)(?!\s*:)\b</string>
+			<string>\b(?&lt;!\.)(break|by|catch|continue|else|finally|for|in|of|if|return|switch|then|throw|try|unless|when|while|until|loop|do|(?&lt;=for)\s+own)(?!\s*:)\b</string>
 			<key>name</key>
 			<string>keyword.control.coffee</string>
 		</dict>
@@ -299,6 +310,21 @@
 					<key>name</key>
 					<string>entity.name.function.coffee</string>
 				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.coffee</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.function.coffee</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.coffee</string>
+				</dict>
 			</dict>
 			<key>match</key>
 			<string>(\s*)(?=[a-zA-Z\$_])([a-zA-Z\$_](\w|\$|:|\.)*\s*(?=[:=](\s*\(.*\))?\s*((=|-)&gt;)))</string>
@@ -345,16 +371,16 @@
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>entity.other.inherited-class.coffee</string>
+					<string>keyword.control.inheritance.coffee</string>
 				</dict>
 				<key>4</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.control.inheritance.coffee</string>
+					<string>entity.other.inherited-class.coffee</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(class\b)\s+([a-zA-Z\$_]\w+)?(\s+(extends)\s+[a-zA-Z\$_]\w*)?</string>
+			<string>(class\b)\s+([a-zA-Z\$_][\w\.]+)?(?:\s+(extends)\s+([a-zA-Z\$\._][\w\.]*))?</string>
 			<key>name</key>
 			<string>meta.class.coffee</string>
 		</dict>
@@ -482,7 +508,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(#).*$\n?</string>
+					<string>(?&lt;!\\)(#).*$\n?</string>
 					<key>name</key>
 					<string>comment.line.coffee</string>
 				</dict>

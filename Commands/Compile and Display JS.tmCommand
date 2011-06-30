@@ -7,9 +7,16 @@
 	<key>command</key>
 	<string>#!/bin/bash
 
-echo "&lt;pre style='font-family:Menlo; font-size: 22px;'&gt;"
-coffee -scp --bare | sed 's/&lt;/\&amp;lt;/g' | sed 's/&gt;/\&amp;gt;/g'
-echo "&lt;/pre&gt;"</string>
+function highlight {
+  test `which pygmentize`
+  if [[ $? -eq 0 ]]; then
+    pygmentize -Onoclasses,nobackground=True,linenos=1 -l js -f html
+  else
+    pre
+  fi
+}
+
+${TM_COFFEE:=coffee} -scp --bare | highlight</string>
 	<key>fallbackInput</key>
 	<string>document</string>
 	<key>input</key>
